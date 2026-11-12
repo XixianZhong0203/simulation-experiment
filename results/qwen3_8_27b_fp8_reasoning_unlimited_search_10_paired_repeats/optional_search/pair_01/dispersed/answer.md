@@ -1,0 +1,7 @@
+你这个想法其实抓住了主动式 AI（proactive AI）研究里的一个核心张力：一条建议到底帮到你还是打断你，取决于它出手的“时机”和它的“重量”。你的两个猜想正好对应到已有研究的两条证据线索，可以整理成一个“时机 × 可忽略性”的二维思路。
+
+第一，用户当时需不需要帮助，也就是介入时机。研究普遍把主动式系统建模为要在“帮助的价值”与“打断的代价”之间做权衡。例如 ProMemAssist 通过实时建模用户工作记忆来判断何时该出手，结果比 LLM 基线更“挑”、参与度也更高（ProMemAssist: Exploring Timely Proactive Assistance Through Working Memory Modeling in Multi-Modal Wearable Devices, DOI: 10.1145/3746059.3747770）。主动微学习的研究同样强调要识别“合适时机”的上下文因素（Interrupting for Microlearning: Understanding Perceptions and Interruptibility of Proactive Conversational Microlearning Services, DOI: 10.1145/3613904.3642778），而 LlamaPIE 干脆把“何时该回应”当作主动助手的关键设计问题，目标是 helpful 但 unobtrusive（LlamaPIE: Proactive In-Ear Conversation Assistants, DOI: 10.18653/v1/2025.findings-acl.710）。
+
+第二，用户能不能轻松跳过、继续原任务，也就是建议的显著性／可忽略性。Codellaborator 发现，更显著的主动支持确实提升了效率，但也会造成工作流打断；而“在场提示”和“交互上下文”能减轻这种打断，作者也由此强调需要在用户控制权、所有权和代码理解上权衡（Assistance or Disruption? Exploring and Evaluating the Design and Trade-offs of Proactive AI Programming Support, DOI: 10.1145/3706598.3713357）。协作写作的研究进一步区分了“侵入式”（补全下一句）与“非侵入式”（探索性提案）两种建议风格，指出 AI 参与度与用户感知自主权之间存在权衡，且这一权衡会被“AI 激发了用户多少”所调节（Proactive AI as a Catalyst for Creativity? Balancing Human Agency and AI Contribution in Collaborative Story Writing, DOI: 10.1145/3772318.3790848）。
+
+把两者合起来，你的猜想可以表述为：当系统在对的时刻出手、且建议足够轻、能被低成本地忽略或快速恢复原任务时，主动建议更可能帮用户继续下去；而一旦时机不对，或建议难以跳过，它就容易从“帮助”滑向“干扰”。这也呼应了 Need Help? Designing Proactive AI Assistants for Programming 提出的混合主动性（mixed-initiative）框架，以及其“主动助手确有收益、但效果取决于设计细节”的结论（DOI: 10.1145/3706598.3714002）。

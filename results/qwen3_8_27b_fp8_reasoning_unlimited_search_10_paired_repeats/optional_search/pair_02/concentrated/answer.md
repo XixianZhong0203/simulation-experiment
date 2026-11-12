@@ -1,0 +1,7 @@
+你的直觉抓住了两个关键变量，可以表述为一个「时机 × 可跳过性」的交互效应：AI 主动建议的效果，取决于建议到达的时刻与用户当下状态是否匹配（需不需要帮助），以及用户能否以足够低的成本跳过建议、回到原任务。这两个维度在现有文献中分别有依据，但很少被同时纳入设计：
+
+其一，时机/需要。主动介入的「合适时刻」由情境因素决定，例如家庭场景下的主动微学习研究发现合适的介入时机取决于一系列上下文条件（Interrupting for Microlearning: Understanding Perceptions and Interruptibility of Proactive Conversational Microlearning Services, DOI: 10.1145/3613904.3642778）。在写作中，Proactive AI as a Catalyst for Creativity? Balancing Human Agency and AI Contribution in Collaborative Story Writing（DOI: 10.1145/3772318.3790848）发现 AI 介入程度与人的主体感（agency）之间存在权衡，而这个权衡被「AI 是否真正激发了用户」所调节——也就是说，用户当时是否从建议中获益，比建议出现的频率更能决定体验好坏。
+
+其二，可跳过性/打断成本。侵入式（如逐句补全）与建议式（如探索性提议）在打断程度上差异明显，上述 Wizard-of-Oz 研究正是通过对比这两种建议风格来讨论何时、以何种方式给建议。Script&Shift: A Layered Interface Paradigm for Integrating Content Development and Rhetorical Strategy with LLM Writing Assistants（DOI: 10.1145/3706598.3714119）从界面端给出方案：让 LLM 能力与写作意图对齐、分层介入，从而保留自然写作流，本质是降低建议的打断成本。用户端证据也支持这一点：Investigating How Computer Science Researchers Design Their Co-Writing Experiences With AI（DOI: 10.1145/3706598.3713205）明确观察到「工作流被打断」和「过度依赖 AI」是共写中的核心问题，且面对同样的建议，用户会自发演化出抵抗、顺应、编排等不同应对风格。
+
+因此你的假设可以具体化为一个可检验的预测：当用户处于「需要帮助」状态（卡住、停顿、在找素材）且建议容易被跳过（轻量、旁路呈现、忽略后可无缝回到原任务）时，主动建议最有帮助；当用户不需要帮助且建议侵入性强时，最可能打断思路。操作化上，「需要」可用卡滞指标（停顿时长、回溯、求助行为）衡量，「可跳过性」可用跳过成本（忽略后回到原任务的时间与注意力损耗）衡量，结果变量则包括流畅度、产出质量和 agency 感知。这样的定位把 interruptibility 研究（何时该打扰）与 proactive AI/agency 研究（主动介入的得失）两条线接了起来，研究缺口也很清晰：现有工作大多只测「有没有 AI 帮助」，很少同时控制「需要」与「可跳过性」这两个变量。

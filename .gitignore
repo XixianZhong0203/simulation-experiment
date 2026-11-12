@@ -1,2 +1,5 @@
 runs/
 __pycache__/
+results/**/failed_attempts/
+results/**/*.jsonl
+results/**/*.stderr.txt

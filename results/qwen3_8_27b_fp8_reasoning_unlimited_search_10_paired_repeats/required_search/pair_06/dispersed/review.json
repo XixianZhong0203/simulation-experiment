@@ -1,0 +1,16 @@
+{
+  "searches": 1,
+  "retrieved_unique": 6,
+  "cited_user_ids": [
+    "10.1145/3706598.3713357"
+  ],
+  "cited_retrieved_ids": [
+    "10.1145/3613904.3642778",
+    "10.1145/3706598.3714002",
+    "10.1145/3746059.3747770"
+  ],
+  "doi_not_in_presented_material": [],
+  "verified_user_ids": null,
+  "verified_background_ids": null,
+  "idea_alignment_notes": null
+}
