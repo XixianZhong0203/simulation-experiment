@@ -14,6 +14,12 @@
 
    可用 `EXPERIMENT_A_MODEL` 环境变量代替 `--model`。如 Excel 移动了，用 `--workbook "/绝对路径/文件.xlsx"`。第二对可用 `--dispersed-first` 交换运行顺序。
 
+   已验证可跑通的接入示例（provider 定义在 OpenCode 用户配置中）：
+
+   ```sh
+   python3 run.py --model 'litellm/Qwen3.8-27B-FP8-reasoning'
+   ```
+
 模型由 `run.py` 中的 `call_model()` 调用。只需接入 OpenCode 并传入模型 ID，无需改实验代码或把凭证填进本目录。OpenCode 会将模型输入发给你选的模型提供商。
 
 仓库包含两组各 5 篇的实验材料。运行时另需提供原始 Excel 论文库。
