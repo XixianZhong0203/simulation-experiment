@@ -33,6 +33,6 @@ Completed pairs: 20. Failed attempts before successful pairs: 3.
 
 The repeats reuse the same two packets. Packet concentration and topic relevance can both affect the results. The required-search condition also changes the instruction given to the model.
 
-See [PER_RESPONSE_RESULTS.csv](PER_RESPONSE_RESULTS.csv) for all 40 rows. Its record paths lead to the original answer, retrieval results, citation checks, and model inputs.
+See [PER_RESPONSE_RESULTS.csv](results/qwen3_8_27b_fp8_reasoning_unlimited_search_10_paired_repeats/PER_RESPONSE_RESULTS.csv) for all 40 rows. Its record paths lead to the original answer, retrieval results, citation checks, and model inputs.
 
-See [QUALITATIVE_SPOT_CHECKS.md](QUALITATIVE_SPOT_CHECKS.md) for concrete examples of evidence use, topic retention, and unsupported extrapolation.
+See [QUALITATIVE_SPOT_CHECKS.md](results/qwen3_8_27b_fp8_reasoning_unlimited_search_10_paired_repeats/QUALITATIVE_SPOT_CHECKS.md) for concrete examples of evidence use, topic retention, and unsupported extrapolation.

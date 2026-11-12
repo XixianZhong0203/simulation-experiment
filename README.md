@@ -4,8 +4,8 @@ A research repository for studying how language models use supplied evidence and
 
 | Study | Research question | Results |
 | --- | --- | --- |
-| **Experiment A · Evidence selection** | How do concentrated and dispersed sets of five papers affect what a model searches for, cites, and retains from the user's research idea? | [English report](results/qwen3_8_27b_fp8_reasoning_unlimited_search_10_paired_repeats/EXPERIMENT_REPORT.md) · [40 response records](results/qwen3_8_27b_fp8_reasoning_unlimited_search_10_paired_repeats/PER_RESPONSE_RESULTS.csv) |
-| **Experiment B · Requirement retention** | Which of the user's initial requirements are met in the final answer of a multi-turn conversation? | [ThoughtTrace pilot report](experiment-b-thoughttrace-report.md) |
+| **Experiment A · Evidence selection** | How do concentrated and dispersed sets of five papers affect what a model searches for, cites, and retains from the user's research idea? | [English report](experiment-a-report.md) · [40 response records](results/qwen3_8_27b_fp8_reasoning_unlimited_search_10_paired_repeats/PER_RESPONSE_RESULTS.csv) |
+| **Experiment B · Requirement retention** | Which of the user's initial requirements are met in the final answer of a multi-turn conversation? | [ThoughtTrace pilot report](experiment-b-report.md) |
 
 ## Experiment A · Run the paired comparison
 
@@ -33,8 +33,8 @@ python3 repeat_experiment.py --workers 4
 
 The batch runs ten pairs per search policy with `litellm/Qwen3.8-27B-FP8-reasoning`. Odd pairs run concentrated first and even pairs run dispersed first. Use `--workbook /path/to/corpus.xlsx` to override the default workbook path. Successful pairs are retained if the batch is restarted.
 
-See [the English experiment report](results/qwen3_8_27b_fp8_reasoning_unlimited_search_10_paired_repeats/EXPERIMENT_REPORT.md) and the per-answer CSV in the same directory. Each pair records the model, corpus fingerprint, original Chinese inputs and responses, searches and returned abstracts, and automatic citation matches. Citation matches require claim-by-claim checking before they can count as substantive evidence use.
+See [the English experiment report](experiment-a-report.md) and the [per-answer CSV](results/qwen3_8_27b_fp8_reasoning_unlimited_search_10_paired_repeats/PER_RESPONSE_RESULTS.csv). Each pair records the model, corpus fingerprint, original Chinese inputs and responses, searches and returned abstracts, and automatic citation matches. Citation matches require claim-by-claim checking before they can count as substantive evidence use.
 
 ## Experiment B · Read the ThoughtTrace pilot
 
-The pilot reviews 50 additional ThoughtTrace conversations. It scores which opening requirements and which pre-existing requirements identified as omissions in user notes were met in the final substantive answer. The [pilot report](experiment-b-thoughttrace-report.md) contains the sampling and scoring method, aggregate results, and conversation-level evidence.
+The pilot reviews 50 additional ThoughtTrace conversations. It scores which opening requirements and which pre-existing requirements identified as omissions in user notes were met in the final substantive answer. The [pilot report](experiment-b-report.md) contains the sampling and scoring method, aggregate results, and conversation-level evidence.
