@@ -25,18 +25,6 @@ Both policies give the model the same local search interface. In optional mode t
 
 Use `--dispersed-first` to reverse the order. Each model call starts a fresh OpenCode session with the task, the same five abstracts for that group, and the retrieval history to date. The two arms do not share conversation history.
 
-### Open-ended summary
-
-The open-ended study crosses two search policies (optional and required) with the original concentrated and dispersed five-paper packets. It runs ten repeats per condition. Both policies leave the summary topic open.
-
-```sh
-python3 repeat_experiment.py --open-summary --workers 4
-```
-
-The batch uses `litellm/Qwen3.8-27B-FP8-reasoning`. Use `--opencode /path/to/opencode` or `--workbook /path/to/corpus.xlsx` to override the defaults. For a single pair, run `run.py` with `--open-summary`; add `--require-search` for the required condition.
-
-See the [open-ended summary report](experiment-a-open-summary-report.md) for all four conditions and links to the 40 response records.
-
 ### Repeat the experiment
 
 ```sh
