@@ -1,0 +1,66 @@
+{
+  "original_size": 57992,
+  "excluded": [
+    {
+      "id": "10.1145/3613904.3642459",
+      "title": "Generative Echo Chamber? Effect of LLM-Powered Search Systems on Diverse Information Seeking"
+    },
+    {
+      "id": "10.1145/3613904.3642513",
+      "title": "Debate Chatbots to Facilitate Critical Thinking on YouTube: Social Identity and Conversational Style Make A Difference"
+    },
+    {
+      "id": "10.1145/3613904.3642545",
+      "title": "See Widely, Think Wisely: Toward Designing a Generative Multi-agent System to Burst Filter Bubbles"
+    },
+    {
+      "id": "10.1145/3687030",
+      "title": "Conversational Agents to Facilitate Deliberation on Harmful Content in WhatsApp Groups"
+    },
+    {
+      "id": "10.18653/v1/2025.acl-long.944",
+      "title": "Tunable LLM-based Proactive Recommendation Agent"
+    },
+    {
+      "id": "10.18653/v1/2025.emnlp-main.778",
+      "title": "Journalism-Guided Agentic In-context Learning for News Stance Detection"
+    },
+    {
+      "id": "10.18653/v1/2025.findings-acl.928",
+      "title": "iAgent: LLM Agent as a Shield between User and Recommender Systems"
+    },
+    {
+      "id": "10.18653/v1/2025.findings-emnlp.1332",
+      "title": "Leveraging Unpaired Feedback for Long-Term LLM-based Recommendation Tuning"
+    },
+    {
+      "id": "10.18653/v1/2025.naacl-long.411",
+      "title": "Faux Polyglot: A Study on Information Disparity in Multilingual Large Language Models"
+    },
+    {
+      "id": "10.18653/v1/2026.acl-long.1354",
+      "title": "SILO-BENCH: A Scalable Environment for Evaluating Distributed Coordination in Multi-Agent LLM Systems"
+    },
+    {
+      "id": "10.18653/v1/2026.acl-long.322",
+      "title": "GRAPHIA: Harnessing Social Graph Data to Enhance LLM-Based Social Simulation"
+    },
+    {
+      "id": "10.18653/v1/2026.findings-acl.836",
+      "title": "Capabilities and Evaluation Biases of Large Language Models in Classical Chinese Poetry Generation: A Case Study on Tang Poetry"
+    },
+    {
+      "id": "openreview:7fsbfqgti4",
+      "title": "Breaking the Echo Chamber: A Dynamic Ensemble Pruning Perspective on MoE"
+    },
+    {
+      "id": "openreview:kwwgmaxwjg",
+      "title": "Position: Large Language Models Should Learn Personalized Rather Than Aggregated Human Preferences"
+    },
+    {
+      "id": "openreview:me1m626qoo",
+      "title": "The Lock-in Hypothesis: Stagnation by Algorithm"
+    }
+  ],
+  "size": 57977
+}
