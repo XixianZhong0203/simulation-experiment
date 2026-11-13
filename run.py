@@ -254,9 +254,13 @@ def main():
     parser.add_argument("--opencode", default="opencode")
     parser.add_argument("--hits", type=int, choices=range(1, 11), default=6)
     parser.add_argument("--check", action="store_true", help="Verify import and search without invoking a model")
+    parser.add_argument("--open-summary", action="store_true",
+                        help="Use the open-ended summary task with optional retrieval")
     parser.add_argument("--require-search", action="store_true")
     parser.add_argument("--dispersed-first", action="store_true")
     args = parser.parse_args()
+    if args.open_summary and args.require_search:
+        parser.error("--open-summary uses optional retrieval")
     if not args.check and not args.model:
         parser.error("provide --model provider/model or set EXPERIMENT_A_MODEL")
     executable = shutil.which(args.opencode)
@@ -276,7 +280,8 @@ def main():
         order = list(packets)
         if args.dispersed_first:
             order.reverse()
-        task = (ROOT / "task.txt").read_text(encoding="utf-8").strip()
+        task_file = "open-summary-task.txt" if args.open_summary else "task.txt"
+        task = (ROOT / task_file).read_text(encoding="utf-8").strip()
         if args.require_search:
             task = task.replace("你能帮我整理一下这个思路吗？",
                                 "请先从论文库中查找与这个想法相关的研究，再帮我整理这段讨论。")
@@ -289,7 +294,7 @@ def main():
             "workbook_sha256": workbook_hash,
             "stats": stats, "order": order, "hits_per_search": args.hits,
             "max_searches": None, "search_policy": "required" if args.require_search else "optional", "excluded_ids": sorted(p["id"] for g in packets.values() for p in g),
-            "task": task,
+            "task": task, "task_file": task_file,
         })
         print(f"Results: {directory}", flush=True)
         with tempfile.TemporaryDirectory(prefix="experiment-a-opencode-") as cwd:

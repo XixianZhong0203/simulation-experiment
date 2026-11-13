@@ -1,0 +1,5 @@
+pair,packet,model,queries,background_abstracts_returned,attached_papers_verified_used,background_papers_verified_used,answer_path
+1,concentrated,litellm/Qwen3.8-27B-FP8-reasoning,0,0,5,0,pair_01/concentrated/answer.md
+1,dispersed,litellm/Qwen3.8-27B-FP8-reasoning,0,0,5,0,pair_01/dispersed/answer.md
+2,dispersed,litellm/Qwen3.8-27B-FP8-reasoning,0,0,5,0,pair_02/dispersed/answer.md
+2,concentrated,litellm/Qwen3.8-27B-FP8-reasoning,0,0,5,0,pair_02/concentrated/answer.md

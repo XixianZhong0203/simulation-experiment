@@ -25,6 +25,17 @@ Both policies give the model the same local search interface. In optional mode t
 
 Use `--dispersed-first` to reverse the order. Each model call starts a fresh OpenCode session with the task, the same five abstracts for that group, and the retrieval history to date. The two arms do not share conversation history.
 
+### Open-ended summary
+
+The open-ended version lets the model choose the focus of a literature summary and decide whether to search. Both groups use the same prompt and corpus, with either the original concentrated or dispersed five-paper packet. The prompt sets no research topic and requests no preliminary search.
+
+```sh
+python3 run.py --open-summary --model 'litellm/Qwen3.8-27B-FP8-reasoning'
+python3 run.py --open-summary --dispersed-first --model 'litellm/Qwen3.8-27B-FP8-reasoning'
+```
+
+See [the open-ended summary report](experiment-a-open-summary-report.md) for the two paired runs, their evidence counts, and links to the original records.
+
 ### Repeat the experiment
 
 ```sh
