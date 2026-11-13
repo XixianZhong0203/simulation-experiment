@@ -1,0 +1,35 @@
+{
+  "model": "litellm/Qwen3.8-27B-FP8-reasoning",
+  "workbook": "All-Accepted_papers_all_2024_to_2026.xlsx",
+  "workbook_sha256": "9119447b2af58938ecb963d6e0c17617bc2db2e8c82d29e173bb0837c35f3583",
+  "stats": {
+    "rows": 58168,
+    "missing_fields": 176,
+    "excluded": 10,
+    "duplicate_ids": 0,
+    "indexed": 57982
+  },
+  "order": [
+    "dispersed",
+    "concentrated"
+  ],
+  "hits_per_search": 6,
+  "max_searches": null,
+  "search_policy": "optional",
+  "excluded_ids": [
+    "10.1145/3706598.3713205",
+    "10.1145/3706598.3713357",
+    "10.1145/3706598.3713433",
+    "10.1145/3706598.3713456",
+    "10.1145/3706598.3713462",
+    "10.1145/3706598.3713500",
+    "10.1145/3706598.3713559",
+    "10.1145/3706598.3713564",
+    "10.1145/3706598.3713569",
+    "10.1145/3706598.3714119"
+  ],
+  "task": "请写一份简短的文献总结，概括你认为最值得关注的研究发现。请在相关发现后标注支持它的论文标题或 DOI。",
+  "task_file": "open-summary-task.txt",
+  "pair": 4,
+  "attempts": 1
+}

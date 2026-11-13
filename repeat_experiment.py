@@ -14,20 +14,27 @@ MODEL = "litellm/Qwen3.8-27B-FP8-reasoning"
 STUDY = ROOT / "results" / "qwen3_8_27b_fp8_reasoning_unlimited_search_10_paired_repeats"
 
 
-def repeat(policy, number, workbook):
-    folder = STUDY / f"{policy}_search" / f"pair_{number:02d}"
+def repeat(policy, number, args, study):
+    folder = study / f"{policy}_search" / f"pair_{number:02d}"
     if (folder / "comparison.json").is_file():
         return
     command = [sys.executable, str(ROOT / "run.py"), "--model", MODEL]
-    if workbook:
-        command.extend(("--workbook", str(workbook)))
+    if args.workbook:
+        command.extend(("--workbook", str(args.workbook.resolve())))
+    if args.open_summary:
+        command.append("--open-summary")
+    command.extend(("--opencode", args.opencode))
     if policy == "required":
         command.append("--require-search")
     if number % 2 == 0:
         command.append("--dispersed-first")
-    failures = STUDY / "failed_attempts"
+    failures = study / "failed_attempts"
     failures.mkdir(exist_ok=True)
-    for attempt in range(1, 4):
+    label_prefix = f"{policy}_pair_{number:02d}_attempt_"
+    existing = [int(path.stem.removeprefix(label_prefix))
+                for path in failures.glob(f"{label_prefix}*.txt")]
+    first_attempt = max(existing, default=0) + 1
+    for attempt in range(first_attempt, first_attempt + 3):
         result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True)
         match = re.search(r"^Results: (.+)$", result.stdout, re.M)
         if result.returncode == 0 and match:
@@ -56,11 +63,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--workers", type=int, default=4, choices=range(1, 9))
     parser.add_argument("--workbook", type=Path)
+    parser.add_argument("--open-summary", action="store_true")
+    parser.add_argument("--opencode", default="opencode")
     args = parser.parse_args()
-    STUDY.mkdir(parents=True, exist_ok=True)
+    study = (ROOT / "results" / "qwen3_8_27b_fp8_reasoning_open_summary_10_paired_repeats"
+             if args.open_summary else STUDY)
+    study.mkdir(parents=True, exist_ok=True)
     failed = []
     with ThreadPoolExecutor(max_workers=args.workers) as executor:
-        futures = [executor.submit(repeat, policy, number, args.workbook)
+        futures = [executor.submit(repeat, policy, number, args, study)
                    for number in range(1, 11) for policy in ("optional", "required")]
         for future in as_completed(futures):
             try:

@@ -255,12 +255,10 @@ def main():
     parser.add_argument("--hits", type=int, choices=range(1, 11), default=6)
     parser.add_argument("--check", action="store_true", help="Verify import and search without invoking a model")
     parser.add_argument("--open-summary", action="store_true",
-                        help="Use the open-ended summary task with optional retrieval")
+                        help="Use the open-ended summary task")
     parser.add_argument("--require-search", action="store_true")
     parser.add_argument("--dispersed-first", action="store_true")
     args = parser.parse_args()
-    if args.open_summary and args.require_search:
-        parser.error("--open-summary uses optional retrieval")
     if not args.check and not args.model:
         parser.error("provide --model provider/model or set EXPERIMENT_A_MODEL")
     executable = shutil.which(args.opencode)
@@ -282,7 +280,9 @@ def main():
             order.reverse()
         task_file = "open-summary-task.txt" if args.open_summary else "task.txt"
         task = (ROOT / task_file).read_text(encoding="utf-8").strip()
-        if args.require_search:
+        if args.require_search and args.open_summary:
+            task = "请先查阅背景论文库，再写总结。\n\n" + task
+        elif args.require_search:
             task = task.replace("你能帮我整理一下这个思路吗？",
                                 "请先从论文库中查找与这个想法相关的研究，再帮我整理这段讨论。")
         directory = ROOT / "runs" / datetime.now().strftime("%Y%m%d-%H%M%S-%f")

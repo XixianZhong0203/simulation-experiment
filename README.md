@@ -27,14 +27,15 @@ Use `--dispersed-first` to reverse the order. Each model call starts a fresh Ope
 
 ### Open-ended summary
 
-The open-ended version lets the model choose the focus of a literature summary and decide whether to search. Both groups use the same prompt and corpus, with either the original concentrated or dispersed five-paper packet. The prompt sets no research topic and requests no preliminary search.
+The open-ended study crosses two search policies (optional and required) with the original concentrated and dispersed five-paper packets. It runs ten repeats per condition. Both policies leave the summary topic open.
 
 ```sh
-python3 run.py --open-summary --model 'litellm/Qwen3.8-27B-FP8-reasoning'
-python3 run.py --open-summary --dispersed-first --model 'litellm/Qwen3.8-27B-FP8-reasoning'
+python3 repeat_experiment.py --open-summary --workers 4
 ```
 
-See [the open-ended summary report](experiment-a-open-summary-report.md) for the two paired runs, their evidence counts, and links to the original records.
+The batch uses `litellm/Qwen3.8-27B-FP8-reasoning`. Use `--opencode /path/to/opencode` or `--workbook /path/to/corpus.xlsx` to override the defaults. For a single pair, run `run.py` with `--open-summary`; add `--require-search` for the required condition.
+
+See the [open-ended summary report](experiment-a-open-summary-report.md) for all four conditions and links to the 40 response records.
 
 ### Repeat the experiment
 
