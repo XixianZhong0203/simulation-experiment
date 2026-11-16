@@ -7,7 +7,13 @@ Second ThoughtTrace pilot batch · 50 additional conversations · 10 groups of 5
 | Requirements | Met / Total | Unmet | Uncertain |
 | --- | ---: | ---: | ---: |
 | Explicit in the opening task message | 124/141 (87.9%) | 6 | 11 |
-| Opening omissions identified in user notes | 2/7 (28.6%) | 0 | 5 |
+| Opening omissions identified in user notes | 4/7 (57.1%) | 1 | 2 |
+
+### Task expectation audit
+
+We screened all 50 `task_expectation` fields and compared them with the opening request, later turns, and final answer. The [item-level audit](experiment-b-task-expectation-audit.md) covers **23 selected expectations across 18 conversations** that were absent from or more specific than the opening request. **11 were met (47.8%), 4 were partially met (17.4%), and 8 were unmet (34.8%).** These are exploratory counts for the selected items. The retrospective field does not establish when each expectation formed. Some items overlap with the note-based counts above, so the two totals should not be added.
+
+For example, the Barcelona reply supplied hotel recommendations and a daily itinerary without an explicit request for those deliverables in the preceding messages. Another user explicitly asked for recipes and a shopping list later and received both. The Italy reply asked clarifying questions but presented sample itineraries before the user answered, so the expectation to clarify first received partial credit.
 
 ## Method
 
@@ -15,7 +21,7 @@ Second ThoughtTrace pilot batch · 50 additional conversations · 10 groups of 5
 
 **Opening requirements.** We used the first substantive task message and skipped greetings and purely introductory remarks. We listed each independently checkable goal, constraint, or preference. Later additions, revisions, and withdrawals did not change this list.
 
-**Omitted requirements.** An item entered the score when a separate user note identified a requirement that already existed and had been left out of the opening message. Vague references to an omission are documented in the evidence column and excluded from the count. When a note identified the kind of requirement but omitted the value needed to verify it, the item was marked uncertain.
+**Omitted requirements.** An item entered the score when a separate user note identified a requirement that already existed and had been left out of the opening message. Vague references to an omission are documented in the evidence column and excluded from the count. When a note identified a requirement without specifying its value, we checked the corresponding and subsequent user messages before scoring the final answer. Items with insufficient evidence remained uncertain.
 
 **Final answer.** We scored the last substantive assistant reply that still delivered the original task, such as an itinerary, plan, explanation, or comparison. We skipped acknowledgments, new tasks, and replies that only expanded on a subsidiary detail. Message numbers are one-based and include both user and assistant messages. References to notes use the number of the message they annotate.
 
@@ -23,7 +29,7 @@ Second ThoughtTrace pilot batch · 50 additional conversations · 10 groups of 5
 
 ## Interpretation
 
-The Goa itinerary retained historical sites and a day-by-day schedule, but its two nights conflicted with the requested three. In another conversation, a note identified travel duration as an omission without stating the intended length, so a final itinerary alone could not resolve whether it was met.
+The Goa itinerary retained historical sites and a day-by-day schedule, but its two nights conflicted with the requested three. Rechecking the full conversations resolved three formerly uncertain items. The Tsushima itinerary followed the April 12–20 window, and the Italy checklist preserved the requested three-day duration. The Sri Lanka itinerary retained ten nights but changed nine days to eleven.
 
 This is a purposively selected pilot sample scored by a single annotator. The findings describe which requirements were reflected in the final answer. An omitted requirement may have been satisfied after the user supplied more information, and the omission score does not estimate how often the model independently inferred the requirement.
 
@@ -36,12 +42,12 @@ Data source: [SCAI-JHU / ThoughtTrace](https://huggingface.co/datasets/SCAI-JHU/
 | Conversation and messages | Explicit opening requirements | Omitted requirements in notes | Evidence from the final answer | Met / Total |
 | --- | --- | --- | --- | --- |
 | `user8_task1_conversation1`<br>Opening 1 · Final 6 | **Met** — Rome itinerary; Area to stay; Transportation plan; Places to visit | — | Four days of sightseeing, lodging areas such as Monti, and airport and local transportation. The note on message 5 does not name the omitted item. | Opening 4/4<br>Omitted — |
-| `user348_task1_conversation1`<br>Opening 1 · Final 4 | **Met** — Depart from Poland; Plan the full trip to Tsushima<br>**Uncertain** — Visit every worthwhile site on the island | **Uncertain** — Travel window | The response covers flight connections and a day-by-day island itinerary. Exhaustive site coverage cannot be verified. The note on message 3 gives no dates. | Opening 2/3<br>Omitted 0/1 |
-| `user357_task1_conversation1`<br>Opening 3 · Final 18 | **Met** — Travel to Sri Lanka; Travel solo; Travel in April<br>**Uncertain** — Stay within INR 200,000 | **Uncertain** — Trip length in days and nights | The solo itinerary includes April activities. It repeats the budget without an itemized total. The note on message 6 gives no number of days or nights. | Opening 3/4<br>Omitted 0/1 |
+| `user348_task1_conversation1`<br>Opening 1 · Final 4 | **Met** — Depart from Poland; Plan the full trip to Tsushima<br>**Uncertain** — Visit every worthwhile site on the island | **Met** — Travel window | The response covers flight connections and a day-by-day island itinerary. Exhaustive site coverage cannot be verified. Message 3 specifies April 12–20 and return to Poland by April 20. The final itinerary follows that window. | Opening 2/3<br>Omitted 1/1 |
+| `user357_task1_conversation1`<br>Opening 3 · Final 18 | **Met** — Travel to Sri Lanka; Travel solo; Travel in April<br>**Uncertain** — Stay within INR 200,000 | **Unmet** — Trip length in days and nights | The solo itinerary includes April activities. It repeats the budget without an itemized total. Message 7 specifies nine days and ten nights. The final answer gives eleven days and ten nights. | Opening 3/4<br>Omitted 0/1 |
 | `user407_task2_conversation1`<br>Opening 1 · Final 2 | **Met** — Use a monthly income of USD 3,500; Account for four fixed expenses at the stated amounts; Save at least USD 500; Set aside money for entertainment; Give further savings tips | — | The table lists rent of USD 1,200, utilities of USD 250, transport of USD 150, and food of USD 400, with separate savings and entertainment allocations. | Opening 5/5<br>Omitted — |
 | `user467_task2_conversation1`<br>Opening 1 · Final 2 | **Met** — Packing advice for a summer trip to Italy | — | Light clothing, shoes for cobblestones, church dress codes, and a packing checklist. Finding shops was a separate later task. | Opening 1/1<br>Omitted — |
 
-**Group totals.** Opening: (4 + 2 + 3 + 5 + 1) ÷ (4 + 3 + 4 + 5 + 1) = 15/17 (88.2%). Omitted: (0 + 0) ÷ (1 + 1) = 0/2 (0.0%).
+**Group totals.** Opening: (4 + 2 + 3 + 5 + 1) ÷ (4 + 3 + 4 + 5 + 1) = 15/17 (88.2%). Omitted: (1 + 0) ÷ (1 + 1) = 1/2 (50.0%).
 
 ### Group 02
 
@@ -49,11 +55,11 @@ Data source: [SCAI-JHU / ThoughtTrace](https://huggingface.co/datasets/SCAI-JHU/
 | --- | --- | --- | --- | --- |
 | `user631_task2_conversation1`<br>Opening 1 · Final 6 | **Met** — Explain how glass is made | — | The response summarizes melting the raw materials, shaping the glass, and annealing. | Opening 1/1<br>Omitted — |
 | `user880_task1_conversation1`<br>Opening 3 · Final 6 | **Met** — Suggest ways to remember new English vocabulary | — | The suggestions include spaced repetition, personal context, and active recall. | Opening 1/1<br>Omitted — |
-| `user996_task1_conversation1`<br>Opening 1 · Final 12 | **Met** — Plan a trip to Italy | **Uncertain** — Intended trip length; Intended destination region | The final checklist covers flights, destinations, and activities. The note on message 2 identifies both omissions without specifying the intended values. | Opening 1/1<br>Omitted 0/2 |
+| `user996_task1_conversation1`<br>Opening 1 · Final 12 | **Met** — Plan a trip to Italy | **Met** — Intended trip length<br>**Uncertain** — Intended destination region | The final checklist covers flights, destinations, and activities. Message 3 specifies three days, which the final checklist preserves. The user requests a quiet experience without specifying a fixed region. | Opening 1/1<br>Omitted 1/2 |
 | `user1019_task1_conversation1`<br>Opening 3 · Final 14 | **Met** — Recommend a graphics card to buy | **Uncertain** — Consider buying used if it costs less | The response recommends a used RTX 4060 Ti and gives prices, without a comparison to the same card new. The omission is documented in the note on message 11. | Opening 1/1<br>Omitted 0/1 |
 | `user292_task2_conversation1`<br>Opening 1 · Final 8 | **Met** — Provide a reading passage on a medical topic; Write in English<br>**Unmet** — Write about 5,000 words<br>**Uncertain** — Aim for a difficulty of about 8/10 | — | The English passage discusses the gut–brain axis and runs to about 500 words. The technical language is apparent, but no scale is defined for 8/10. | Opening 2/4<br>Omitted — |
 
-**Group totals.** Opening: (1 + 1 + 1 + 1 + 2) ÷ (1 + 1 + 1 + 1 + 4) = 6/8 (75.0%). Omitted: (0 + 0) ÷ (2 + 1) = 0/3 (0.0%).
+**Group totals.** Opening: (1 + 1 + 1 + 1 + 2) ÷ (1 + 1 + 1 + 1 + 4) = 6/8 (75.0%). Omitted: (1 + 0) ÷ (2 + 1) = 1/3 (33.3%).
 
 ### Group 03
 

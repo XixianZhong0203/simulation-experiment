@@ -38,7 +38,7 @@ See [the English experiment report](experiment-a-report.md) and the [per-answer 
 
 ## Experiment B · Read the ThoughtTrace pilot
 
-The pilot reviews 50 additional ThoughtTrace conversations. It scores which opening requirements and which pre-existing requirements identified as omissions in user notes were met in the final substantive answer. The [pilot report](experiment-b-report.md) contains the sampling and scoring method, aggregate results, and conversation-level evidence.
+The pilot reviews 50 additional ThoughtTrace conversations. It scores which opening requirements and which pre-existing requirements identified as omissions in user notes were met in the final substantive answer. The [pilot report](experiment-b-report.md) contains the sampling and scoring method, aggregate results, and conversation-level evidence. The [task expectation audit](experiment-b-task-expectation-audit.md) documents 23 selected expectations and how they were handled across the conversations.
 
 ## Experiment C · Four-layer intent retention
 
