@@ -6,7 +6,7 @@ A research repository for studying how language models use supplied evidence and
 | --- | --- | --- |
 | **Experiment A · Evidence selection** | How do concentrated and dispersed sets of five papers affect what a model searches for, cites, and retains from the user's research idea? | [English report](experiment-a-report.md) · [40 response records](results/qwen3_8_27b_fp8_reasoning_unlimited_search_10_paired_repeats/PER_RESPONSE_RESULTS.csv) |
 | **Experiment B · Requirement retention** | Which of the user's initial requirements are met in the final answer of a multi-turn conversation? | [ThoughtTrace pilot report](experiment-b-report.md) |
-| **Experiment C · Multi-turn intent retention** | How much of a four-layer research proposal survives successive discussions, evidence retrieval, and design trade-offs? | [Pilot report](experiment-c-report.md) |
+| **Experiment C · Multi-turn intent retention** | How much of a four-layer research proposal survives successive discussions, evidence retrieval, and design trade-offs? | [Report and five replications](experiment-c-report.md) |
 
 ## Experiment A · Run the paired comparison
 
@@ -40,6 +40,6 @@ See [the English experiment report](experiment-a-report.md) and the [per-answer 
 
 The pilot reviews 50 additional ThoughtTrace conversations. It scores which opening requirements and which pre-existing requirements identified as omissions in user notes were met in the final substantive answer. The [pilot report](experiment-b-report.md) contains the sampling and scoring method, aggregate results, and conversation-level evidence.
 
-## Experiment C · Read the four-layer pilot
+## Experiment C · Four-layer intent retention
 
-The [Experiment C report](experiment-c-report.md) documents the paired pilot, its intent-retention rubric, and the full dialogue records.
+The [Experiment C report](experiment-c-report.md) documents the original pilot and five additional pairs. See the [English scoring rubric](experiment_c/rubric.md) and [item-level replication results](results/experiment_c_qwen3_8_four_layer_replications/manual-review.md) for the scoring criteria, deductions, and final answers.

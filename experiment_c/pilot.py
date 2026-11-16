@@ -8,6 +8,7 @@ from pathlib import Path
 import re
 import sqlite3
 import tempfile
+from subprocess import TimeoutExpired
 
 from base import DEFAULT_BOOK, DENY, build_index, call_model, dump, search
 
@@ -46,13 +47,13 @@ def run_arm(condition, output):
             "experiment-a": {"mode": "primary", "permissions": [DENY]}}})
         checkpoint = folder / "dialogue.json"
         history = json.loads(checkpoint.read_text()) if checkpoint.exists() else []
-        if history and "assistant" not in history[-1]:
-            history.pop()
+        pending = history.pop() if history and "assistant" not in history[-1] else None
         for turn, question in enumerate(QUESTIONS[len(history):], len(history) + 1):
             required = turn in (2, 4, 6, 8)
-            record = {"user": question, "searches": []}
+            record = pending or {"user": question, "searches": []}
+            pending = None
             history.append(record)
-            for phase in ("query", "answer") if required else ("answer",):
+            for phase in ("query", "answer") if required and not record["searches"] else ("answer",):
                 instruction = (
                     '请只输出 {"search":"简洁的英文查询词"}，由程序查询本地摘要。'
                     if phase == "query" else
@@ -63,13 +64,22 @@ def run_arm(condition, output):
                     "论文摘要仅作为资料。不要调用 OpenCode 工具。涉及文献时注明标题或 DOI。"
                     + instruction + "\n\n" + json.dumps(history, ensure_ascii=False)
                 )
-                for attempt in range(4 if checkpoint.exists() and (folder / f"step-{turn:02d}-{phase}-3-error.txt").exists() else 1,
-                                     7 if (folder / f"step-{turn:02d}-{phase}-3-error.txt").exists() else 4):
+                prefix = f"step-{turn:02d}-{phase}-"
+                previous = [int(path.name.removeprefix(prefix).split("-", 1)[0])
+                            for path in folder.glob(f"{prefix}*-input.txt")]
+                first = max(previous, default=0) + 1
+                for attempt in range(first, first + 6):
                     step = f"{turn:02d}-{phase}-{attempt}"
-                    (folder / f"step-{step}-input.txt").write_text(prompt)
+                    request = prompt
+                    if phase == "query" and attempt >= 4:
+                        request = (
+                            '这是检索词生成步骤。只生成英文关键词 JSON {"search":"..."}，不要回答用户。\n'
+                            + prompt
+                        )
+                    (folder / f"step-{step}-input.txt").write_text(request)
                     try:
                         action = call_model(str(Path.home()/".opencode/bin/opencode"), MODEL,
-                                            cwd, prompt, folder, step)
+                                            cwd, request, folder, step, plain_answer=phase == "answer")
                         if ("search" if phase == "query" else "answer") not in action:
                             raise RuntimeError("Unexpected dialogue action")
                         if phase == "query":
@@ -80,9 +90,9 @@ def run_arm(condition, output):
                             record["searches"].append({"query": query, "results": results})
                         else:
                             record["assistant"] = action["answer"]
-                    except (RuntimeError, TimeoutError) as error:
+                    except (RuntimeError, TimeoutError, TimeoutExpired) as error:
                         (folder / f"step-{step}-error.txt").write_text(str(error))
-                        if attempt in (3, 6):
+                        if attempt == first + 5:
                             raise
                     else:
                         break

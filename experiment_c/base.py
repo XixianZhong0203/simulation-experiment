@@ -142,7 +142,7 @@ def search(db, query, limit):
     )]
 
 
-def call_model(executable, model, cwd, prompt, directory, step):
+def call_model(executable, model, cwd, prompt, directory, step, *, plain_answer=False):
     env = dict(os.environ)
     # OpenCode 依据 PWD 环境变量（而非子进程 cwd）确定项目位置；不同步的话，
     # 临时目录里定义了 experiment-a 代理的 opencode.json 不会被发现，
@@ -203,7 +203,14 @@ def call_model(executable, model, cwd, prompt, directory, step):
                     "Recovered answer with unescaped quotes. See the raw JSONL.")
                 break
     else:
-        raise RuntimeError(f"Invalid model response. See logs in {directory}")
+        prose = "".join(text_parts).strip()
+        if (plain_answer and prose and not prose.startswith(("{", "[", "```"))
+                and events and events[-1].get("part", {}).get("reason") == "stop"):
+            action = {"answer": prose}
+            (directory / f"step-{step}-recovered.txt").write_text(
+                "Accepted completed plain-text answer. See the raw JSONL.", encoding="utf-8")
+        else:
+            raise RuntimeError(f"Invalid model response. See logs in {directory}")
     if (not isinstance(action, dict) or len(action) != 1
             or next(iter(action)) not in {"search", "answer"}
             or not isinstance(next(iter(action.values())), str)

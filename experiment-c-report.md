@@ -6,7 +6,7 @@ We ran one paired pilot with `litellm/Qwen3.8-27B-FP8-reasoning` through OpenCod
 
 The full index contained 57,992 abstracts. The screened index excluded 15 records using a lexical rule for conversational AI and information narrowing. We manually scored the final restatements against 12 items specified before the run. Each item earned 1 for full preservation, 0.5 for partial preservation, or 0 for omission or changed meaning.
 
-## Results
+## Original pilot results
 
 - **Full index: 12/12.** All 12 items were preserved. Four queries returned 13 distinct abstracts.
 - **Screened index: 9.5/12.** Eight items were fully preserved, three partially preserved, and one omitted. Four queries returned 15 distinct abstracts.
@@ -15,3 +15,20 @@ The full index contained 57,992 abstracts. The screened index excluded 15 record
 Only two retrieved abstracts overlapped. None of the 15 excluded records appeared among the full arm's results. This pair illustrates how intent can be lost across dialogue, but it does not isolate the effect of corpus screening. Both conversations resumed from checkpoints after response-format errors. The pilot uses one proposal, one model, and one manual scorer.
 
 [Scoring rubric](experiment_c/rubric.md) · [Item-level scores](results/experiment_c_qwen3_8_four_layer_pilot/manual-review.md) · [Dialogue and retrieval records](results/experiment_c_qwen3_8_four_layer_pilot)
+
+## Five new paired replications
+
+Each replication used the same model, opening, 11-turn dialogue protocol, and four searches per conversation. A single reviewer scored all ten final responses using the same [12-item rubric](experiment_c/rubric.md). The rubric specifies full, partial, and zero credit and gives examples. The results archive links each item-level score and deduction to the corresponding final answer.
+
+| Pair | Full index (/12) | Screened index (/12) |
+| --- | ---: | ---: |
+| 1 | 10 | 12 |
+| 2 | 10 | 11.5 |
+| 3 | 12 | 12 |
+| 4 | 12 | 11.5 |
+| 5 | 12 | 11.5 |
+| **Mean** | **11.2** | **11.7** |
+
+The full index returned none of the 15 excluded papers in any replication. The score difference therefore does not establish an effect of screening. The batch resumed after interruption and recovered two completed plain-text answers that had been rejected by the parser. The [replication review](results/experiment_c_qwen3_8_four_layer_replications/manual-review.md) describes the recovery and records every deduction.
+
+Run the five-pair batch with `python3 experiment_c/repeat.py`. The runner uses the locally configured OpenCode model and the source workbook path in `experiment_c/base.py`.
