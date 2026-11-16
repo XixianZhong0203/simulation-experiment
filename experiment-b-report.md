@@ -4,10 +4,11 @@ Second ThoughtTrace pilot batch · 50 additional conversations · 10 groups of 5
 
 ## Results
 
-| Requirements | Met / Total | Unmet | Uncertain |
-| --- | ---: | ---: | ---: |
-| Explicit in the opening task message | 124/141 (87.9%) | 6 | 11 |
-| Opening omissions identified in user notes | 4/7 (57.1%) | 1 | 2 |
+| Requirements | Met / Total | Partially met | Unmet | Uncertain |
+| --- | ---: | ---: | ---: | ---: |
+| Explicit in the opening task message | 124/141 (87.9%) | — | 6 | 11 |
+| Opening omissions identified in user notes | 4/7 (57.1%) | — | 1 | 2 |
+| Selected expectations from `task_expectation` | 11/23 (47.8%) | 4 | 8 | 0 |
 
 ### Task expectation audit
 
